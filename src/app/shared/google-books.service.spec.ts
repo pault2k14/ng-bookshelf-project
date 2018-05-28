@@ -3,8 +3,8 @@
 import {TestBed, async, inject, tick, fakeAsync} from '@angular/core/testing';
 import {GoogleBooksService} from './google-books.service';
 import {HttpModule, BaseRequestOptions, Http, ResponseOptions, Response} from "@angular/http";
-import {MockBackend} from "@angular/http/testing";
-import {Book} from "./book";
+import {MockBackend} from '@angular/http/testing';
+import {Book} from './book';
 
 describe('GoogleBooksService', () => {
 
@@ -481,9 +481,10 @@ describe('GoogleBooksService', () => {
       });
 
       // Perform a request and make sure we get the response we expect
-      let book: Book = null;
-      service.retrieveBook("js2P_8lbR2wC").subscribe(value => book = value);
+      let book: any = null;
+      service.retrieveBook('js2P_8lbR2wC').subscribe(value => book = value);
       tick();
+
 
       expect(book.id).toBe("js2P_8lbR2wC");
       expect(book.title).toBe("Fundamentals of Biomechanics");
