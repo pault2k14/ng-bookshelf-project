@@ -3,7 +3,6 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 import {Book} from './book';
 
 @Injectable()
@@ -69,6 +68,8 @@ export class GoogleBooksService {
 
   retrieveBook(bookId: string) {
     return this.http.get(`${this.API_PATH}/${bookId}`)
+      .map(res => res.json())
+      .map(item => this.bookFactory(item));
   }
 
   private bookFactory(item: any): Book {
