@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit, ReflectiveInjector} from '@angular/core';
 import {GoogleBooksService} from "../shared/google-books.service";
 import {Book} from "../shared/book";
 import {Router, ActivatedRoute} from "@angular/router";
+import {ReflectiveDependency} from '@angular/core/src/di/reflective_provider';
 
 @Component({
   selector: 'app-search',
@@ -10,15 +11,26 @@ import {Router, ActivatedRoute} from "@angular/router";
 })
 export class SearchComponent implements OnInit {
 
-  constructor() {
+  private term = '';
+
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private googleBooksService: GoogleBooksService) {
+    this.route.params.subscribe(params => {
+      console.log(params);
+      if (params['term']) {
+        this.term = params['term'];
+        this.onSearch(this.term);
+      }
+    });
   }
 
   doSearch() {
-    //TODO
+    this.router.navigate(['search', {term: this.term}]);
   }
 
   onSearch(term: string) {
-    //TODO
+    this.googleBooksService.searchBooks(term);
   }
 
   ngOnInit() {
