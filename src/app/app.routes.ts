@@ -11,5 +11,5 @@ export const routes: Routes = [
   {path: '', redirectTo: 'library', pathMatch: 'full'},
   {path: 'library', component: LibraryComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'book/:bookid', component: BookComponent}
+  {path: 'book/:bookId', component: BookComponent}
 ];
