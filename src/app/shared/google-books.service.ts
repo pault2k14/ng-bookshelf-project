@@ -38,7 +38,11 @@ export class GoogleBooksService {
   }
 
   set page(val: number) {
+    console.log("Page changed! 1");
+    console.log("val = ", val);
+    console.log("this.page =", this.page);
     if (val !== this.page) {
+      console.log("Page changed! 2");
       this._page = val;
       this.searchBooks(this.query);
     }

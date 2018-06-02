@@ -1,4 +1,5 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {GoogleBooksService} from '../shared/google-books.service';
 
 @Component({
   selector: 'app-pager',
@@ -7,15 +8,24 @@ import {Component, OnInit} from "@angular/core";
 })
 export class PagerComponent implements OnInit {
 
-  constructor() {
+  @Input()
+  private page = 1;
+
+  @Input()
+  private totalPages = 0;
+
+  @Output()
+  private changePage: EventEmitter<number> = new EventEmitter<number>();
+
+  constructor(private googleBookService: GoogleBooksService) {
   }
 
   next() {
-    //TODO
+      this.changePage.emit(this.page + 1);
   }
 
   prev() {
-    //TODO
+    this.changePage.emit(this.page - 1);
   }
 
 
